@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Comte Gaz &mdash; Chauffage, Plomberie, Sanitaire</title>
+  <title>Walid Plomberie &mdash; Chauffage, Plomberie, Sanitaire</title>
   <style>
     :root {
       --bleu-nuit: #0b0d11;
@@ -142,7 +142,12 @@
     .hero {
       padding: 4.5rem 0 3.5rem;
       border-bottom: 1px solid var(--gris-ligne);
-      background: linear-gradient(180deg, #fcfcfd 0%, #f1f1f3 100%);
+      background:
+        linear-gradient(90deg, rgba(252, 252, 253, 0.98) 0%, rgba(245, 245, 247, 0.96) 45%, rgba(245, 245, 247, 0.88) 60%, rgba(245, 245, 247, 0.0) 100%),
+        url("hero-hero.png");
+      background-size: auto 120%, cover;
+      background-position: left center, right center;
+      background-repeat: no-repeat;
     }
 
     .hero-inner {
@@ -232,7 +237,8 @@
     .btn-primary {
       border-color: var(--accent);
       color: #fff;
-      background: var(--accent);
+      background: linear-gradient(135deg, #111317, #3b3f47);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, 0.35);
     }
 
     .btn:hover {
@@ -260,6 +266,19 @@
     .section-grid img:hover {
       transform: translateY(-6px) scale(1.02);
       box-shadow: 0 28px 70px rgba(6, 7, 10, 0.16);
+    }
+
+    #entreprise .section-grid img {
+      max-width: 420px;
+      width: 100%;
+      margin-left: auto;
+      height: 300px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    #entreprise.section-block {
+      background: transparent;
     }
 
     .section-head {
@@ -383,6 +402,13 @@
       text-transform: uppercase;
       color: rgba(17, 19, 23, 0.6);
       background: var(--surface);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .supplier-logos span:hover {
+      transform: translateY(-3px);
+      border-color: rgba(17, 19, 23, 0.3);
+      box-shadow: 0 16px 35px rgba(6, 7, 10, 0.16);
     }
 
     .map {
@@ -437,15 +463,14 @@
       letter-spacing: 0.02em;
       box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-      animation: wa-float 3s ease-in-out infinite, wa-glow 2.4s ease-in-out infinite;
     }
 
     .whatsapp-fab span {
       font-size: 1.1rem;
-      animation: wa-icon 2.2s ease-in-out infinite;
     }
 
     .whatsapp-fab:hover {
+      transform: translateY(-2px) scale(1.02);
       box-shadow: 0 22px 45px rgba(0, 0, 0, 0.32);
     }
 
@@ -460,10 +485,10 @@
 
     @keyframes wa-glow {
       0%, 100% {
-        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+        box-shadow: 0 0 18px rgba(37, 211, 102, 0.6);
       }
       50% {
-        box-shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 30px rgba(37, 211, 102, 1);
       }
     }
 
@@ -549,7 +574,7 @@
 <body>
   <header class="site-header" id="top">
     <div class="wrapper header-inner">
-      <a href="#top" class="logo">Comte Gaz</a>
+      <a href="#top" class="logo">Walid Plomberie</a>
       <button class="menu-toggle" type="button" aria-label="Ouvrir le menu">Menu</button>
       <nav id="main-nav">
         <a href="#entreprise">Accueil</a>
@@ -568,7 +593,7 @@
       <div>
         <div class="section-head">Chauffage • Plomberie • Sanitaire</div>
         <h1>Expertise gaz &amp; plomberie contemporaine</h1>
-        <p class="lead">Basé à Toulouse Montaudran, Comte Gaz orchestre vos chaudières, réseaux et salles d’eau avec une approche épurée : interface monochrome, typographies modernisées et détails techniques irréprochables.</p>
+        <p class="lead">Basé à Toulouse Montaudran, Walid Plomberie orchestre vos chaudières, réseaux et salles d’eau avec une approche épurée : interface monochrome, typographies modernisées et détails techniques irréprochables.</p>
         <div class="hero-meta">
           <span>Agréé RGE</span>
           <span>Contrôles Qualigaz</span>
@@ -580,17 +605,6 @@
           <a class="btn" href="mailto:contact@comte-gaz.fr">contact@comte-gaz.fr</a>
         </div>
       </div>
-      <aside class="hero-panel">
-        <h3>Services 2025</h3>
-        <ul>
-          <li>Révisions chaudières gaz murales ou au sol</li>
-          <li>Désembouage et équilibre des réseaux</li>
-          <li>Installations plomberie cuivre &amp; multicouche</li>
-          <li>Salles de bains complètes et accessibles</li>
-          <li>Contrat d’entretien avec certificat</li>
-        </ul>
-        <p style="margin:0;font-size:0.9rem;color:rgba(17,19,23,0.55);">Toulouse et 30 km alentour.</p>
-      </aside>
     </div>
   </section>
 
@@ -599,7 +613,7 @@
       <div>
         <div class="section-head">Notre entreprise</div>
         <h2>Un artisan toulousain fidèle à son identité</h2>
-        <p>Comte Gaz revendique un univers blanc, graphite et minimaliste où chaque élément visuel reste silencieux. Chaque chantier est suivi par une équipe artisanale qui s’appuie sur des relevés numériques pour anticiper la maintenance.</p>
+        <p>Walid Plomberie revendique un univers blanc, graphite et minimaliste où chaque élément visuel reste silencieux. Chaque chantier est suivi par une équipe artisanale qui s’appuie sur des relevés numériques pour anticiper la maintenance.</p>
         <p>Particuliers, bailleurs ou professionnels profitent d’un accompagnement complet : audit, conception, mise en service et documentation. Les finitions restent sobres, les performances, mesurables.</p>
         <div class="tags">
           <span class="tag">Audit énergétique</span>
@@ -608,7 +622,7 @@
         </div>
       </div>
       <div>
-        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=60" alt="Technicien Comte Gaz">
+        <img src="hero-hero.png" alt="Walid Plomberie">
       </div>
     </div>
   </section>
@@ -655,12 +669,12 @@
   <section class="section-block section--alt" id="sanitaire">
     <div class="wrapper section-grid">
       <div>
-        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=60" alt="Salle de bain Comte Gaz">
+        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=60" alt="Salle de bain Walid Plomberie">
       </div>
       <div>
         <div class="section-head">Sanitaire</div>
         <h2>Salles de bains épurées</h2>
-        <p>Nous imaginons et rénovons vos salles d’eau : douches italiennes, colonnes thermostatiques, ballons d’eau chaude ou accessoires PMR. La palette blanche et graphite domine, ponctuée de textures métalliques qui signent l’identité Comte Gaz.</p>
+        <p>Nous imaginons et rénovons vos salles d’eau : douches italiennes, colonnes thermostatiques, ballons d’eau chaude ou accessoires PMR. La palette blanche et graphite domine, ponctuée de textures métalliques qui signent l’identité Walid Plomberie.</p>
         <p>Chaque chantier est livré clé en main avec plan 3D, sélection de matériaux et suivi de la production d’eau chaude, qu’elle soit électrique ou gaz.</p>
         <div class="pill-grid">
           <span class="pill">Douches italiennes</span>
@@ -720,13 +734,13 @@
   </section>
 
   <div class="wrapper" style="padding-bottom:3rem;" id="carte">
-    <iframe class="map" src="https://www.google.com/maps?q=43.565309,1.4915233&z=15&output=embed" allowfullscreen loading="lazy" title="Comte Gaz"></iframe>
+    <iframe class="map" src="https://www.google.com/maps?q=43.565309,1.4915233&z=15&output=embed" allowfullscreen loading="lazy" title="Walid Plomberie"></iframe>
   </div>
 
   <footer class="footer">
     <div class="wrapper footer-inner">
       <div>
-        <h4>Comte Gaz</h4>
+        <h4>Walid Plomberie</h4>
         <p>Chauffage, plomberie et sanitaire à Toulouse depuis 2001.</p>
       </div>
       <div>
@@ -739,7 +753,7 @@
       </div>
     </div>
     <div class="wrapper copyright">
-      © 2025 Comte Gaz. Site inspiré de la version officielle, interprété en monochrome.
+      © 2025 Walid Plomberie. Site inspiré de la version officielle, interprété en monochrome.
     </div>
   </footer>
 
@@ -748,7 +762,7 @@
     class="whatsapp-fab"
     target="_blank"
     rel="noopener noreferrer"
-    aria-label="Discuter avec Comte Gaz sur WhatsApp"
+    aria-label="Discuter avec Walid Plomberie sur WhatsApp"
   >
     <span>💬</span> WhatsApp
   </a>
