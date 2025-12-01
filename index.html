@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comte Gaz &mdash; Chauffage, Plomberie, Sanitaire</title>
+  <style>
+    :root {
+      --bleu-nuit: #0b0d11;
+      --bleu-royal: #24262c;
+      --bleu-oc: #5c5f66;
+      --accent: #0b0d11;
+      --accent-light: #8e9098;
+      --gris-ligne: rgba(15, 16, 20, 0.16);
+      --texte: #111317;
+      --surface: #ffffff;
+      --fond: #f6f6f7;
+      --font-ui: "SF Pro Display","SF Pro Text",-apple-system,BlinkMacSystemFont,"Helvetica Neue","Segoe UI",sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-ui);
+      font-feature-settings: "liga", "tnum";
+      color: var(--texte);
+      background: var(--fond);
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+      scroll-behavior: smooth;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--bleu-nuit);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 18px;
+      object-fit: cover;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wrapper {
+      width: min(1180px, 92vw);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(12, 12, 12, 0.08);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 50px rgba(6, 7, 10, 0.08);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding: 1.15rem 0;
+    }
+
+    .logo {
+      font-family: var(--font-ui);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--bleu-nuit);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .logo::before {
+      content: "";
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid rgba(12, 12, 12, 0.1);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 230, 230, 0.35));
+    }
+
+    nav {
+      display: flex;
+      gap: 1.25rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      font-weight: 500;
+      color: rgba(17, 19, 23, 0.7);
+    }
+
+    nav a {
+      padding-bottom: 0.2rem;
+      border-bottom: 1px solid transparent;
+      color: inherit;
+      transition: border-color 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      border-color: rgba(11, 13, 17, 0.45);
+    }
+
+    .cta-phone {
+      color: var(--bleu-nuit);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      font-size: 0.95rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--gris-ligne);
+      background: var(--surface);
+      padding: 0.45rem 0.95rem;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      font-weight: 500;
+    }
+
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--gris-ligne);
+      background: linear-gradient(180deg, #fcfcfd 0%, #f1f1f3 100%);
+    }
+
+    .hero-inner {
+      display: grid;
+      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin: 0.5rem 0 1.2rem;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--bleu-nuit);
+    }
+
+    .hero p.lead {
+      font-size: 1.15rem;
+      color: rgba(17, 19, 23, 0.72);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.8rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(17, 19, 23, 0.5);
+    }
+
+    .hero-panel {
+      border: 1px solid var(--gris-ligne);
+      border-radius: 24px;
+      padding: 2rem;
+      display: grid;
+      gap: 1rem;
+      background: var(--surface);
+      box-shadow: 0 25px 60px rgba(6, 7, 10, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .hero-panel h3 {
+      margin: 0;
+      letter-spacing: 0.3em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      color: rgba(17, 19, 23, 0.5);
+    }
+
+    .hero-panel ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.95rem;
+      color: rgba(17, 19, 23, 0.75);
+    }
+
+    .hero-panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 32px 80px rgba(6, 7, 10, 0.14);
+    }
+
+    .btn-row {
+      margin-top: 2rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.85rem 1.6rem;
+      border-radius: 14px;
+      border: 1px solid rgba(17, 19, 23, 0.2);
+      text-transform: none;
+      letter-spacing: 0.01em;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--bleu-royal);
+      background: var(--surface);
+      transition: transform 0.2s ease;
+    }
+
+    .btn-primary {
+      border-color: var(--accent);
+      color: #fff;
+      background: var(--accent);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    section.section-block {
+      padding: 3.5rem 0;
+      border-bottom: 1px solid var(--gris-ligne);
+      background: var(--surface);
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: start;
+    }
+
+    .section-grid img {
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.6s ease;
+      box-shadow: 0 18px 40px rgba(6, 7, 10, 0.06);
+    }
+
+    .section-grid img:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 28px 70px rgba(6, 7, 10, 0.16);
+    }
+
+    .section-head {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      color: rgba(17, 19, 23, 0.5);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-grid h2 {
+      margin: 0 0 1rem;
+      font-size: clamp(1.9rem, 3vw, 2.5rem);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .section-grid p {
+      margin: 0 0 1rem;
+      color: rgba(17, 19, 23, 0.72);
+    }
+
+    .tags,
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag,
+    .pill {
+      border: 1px solid rgba(17, 19, 23, 0.16);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      color: rgba(17, 19, 23, 0.7);
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .section--alt {
+      background: #fafafa;
+    }
+
+    .contact {
+      padding: 3.5rem 0;
+      background: #fdfdfd;
+    }
+
+    .contact-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: minmax(280px, 460px);
+    }
+
+    .contact-card {
+      border: 1px solid var(--gris-ligne);
+      border-radius: 24px;
+      padding: 2.2rem;
+      background: var(--surface);
+      box-shadow: 0 20px 45px rgba(6, 7, 10, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .contact-card h3 {
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      font-size: 1.35rem;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 28px 70px rgba(6, 7, 10, 0.14);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-form label {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bleu-royal);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid var(--gris-ligne);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      font-family: inherit;
+      font-size: 1rem;
+      background: var(--fond);
+      color: var(--bleu-nuit);
+    }
+
+    .suppliers {
+      padding: 3rem 0;
+      border-top: 1px solid var(--gris-ligne);
+      background: var(--surface);
+    }
+
+    .supplier-logos {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      text-align: center;
+    }
+
+    .supplier-logos span {
+      border: 1px solid var(--gris-ligne);
+      border-radius: 16px;
+      padding: 1rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(17, 19, 23, 0.6);
+      background: var(--surface);
+    }
+
+    .map {
+      width: 100%;
+      height: 320px;
+      border: 1px solid var(--gris-ligne);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: 0 25px 50px rgba(6, 7, 10, 0.08);
+    }
+
+    .footer {
+      padding: 2.5rem 0 2rem;
+      border-top: 1px solid var(--gris-ligne);
+      color: rgba(17, 19, 23, 0.65);
+      background: var(--surface);
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .footer h4 {
+      margin: 0 0 0.5rem;
+      letter-spacing: 0.02em;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .copyright {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: rgba(17, 19, 23, 0.6);
+    }
+
+    .whatsapp-fab {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 60;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.3rem;
+      border-radius: 999px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: wa-float 3s ease-in-out infinite, wa-glow 2.4s ease-in-out infinite;
+    }
+
+    .whatsapp-fab span {
+      font-size: 1.1rem;
+      animation: wa-icon 2.2s ease-in-out infinite;
+    }
+
+    .whatsapp-fab:hover {
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.32);
+    }
+
+    @keyframes wa-float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes wa-glow {
+      0%, 100% {
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
+      }
+      50% {
+        box-shadow: 0 22px 55px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    @keyframes wa-icon {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.08);
+        opacity: 0.92;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .whatsapp-fab {
+        right: 16px;
+        bottom: 16px;
+        padding: 0.7rem 1.1rem;
+      }
+
+      .hero {
+        padding: 3.2rem 0 2.6rem;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-meta {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      section.section-block {
+        padding: 2.8rem 0;
+      }
+
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-grid img {
+        margin-top: 1.2rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        position: absolute;
+        top: 72px;
+        right: 4vw;
+        left: 4vw;
+        flex-direction: column;
+        background: var(--surface);
+        border: 1px solid var(--gris-ligne);
+        border-radius: 18px;
+        padding: 1.2rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+      }
+
+      nav.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+
+      .cta-phone {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <div class="wrapper header-inner">
+      <a href="#top" class="logo">Comte Gaz</a>
+      <button class="menu-toggle" type="button" aria-label="Ouvrir le menu">Menu</button>
+      <nav id="main-nav">
+        <a href="#entreprise">Accueil</a>
+        <a href="#chauffage">Chauffage</a>
+        <a href="#plomberie">Plomberie</a>
+        <a href="#sanitaire">Sanitaire</a>
+        <a href="#entretien">Entretien</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="cta-phone" href="tel:0561483983">05 61 48 39 83</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrapper hero-inner">
+      <div>
+        <div class="section-head">Chauffage • Plomberie • Sanitaire</div>
+        <h1>Expertise gaz &amp; plomberie contemporaine</h1>
+        <p class="lead">Basé à Toulouse Montaudran, Comte Gaz orchestre vos chaudières, réseaux et salles d’eau avec une approche épurée : interface monochrome, typographies modernisées et détails techniques irréprochables.</p>
+        <div class="hero-meta">
+          <span>Agréé RGE</span>
+          <span>Contrôles Qualigaz</span>
+          <span>Dépannage 6j/7</span>
+          <span>Suivi numérique</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#contact">Demander un devis</a>
+          <a class="btn" href="mailto:contact@comte-gaz.fr">contact@comte-gaz.fr</a>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <h3>Services 2025</h3>
+        <ul>
+          <li>Révisions chaudières gaz murales ou au sol</li>
+          <li>Désembouage et équilibre des réseaux</li>
+          <li>Installations plomberie cuivre &amp; multicouche</li>
+          <li>Salles de bains complètes et accessibles</li>
+          <li>Contrat d’entretien avec certificat</li>
+        </ul>
+        <p style="margin:0;font-size:0.9rem;color:rgba(17,19,23,0.55);">Toulouse et 30 km alentour.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section-block" id="entreprise">
+    <div class="wrapper section-grid">
+      <div>
+        <div class="section-head">Notre entreprise</div>
+        <h2>Un artisan toulousain fidèle à son identité</h2>
+        <p>Comte Gaz revendique un univers blanc, graphite et minimaliste où chaque élément visuel reste silencieux. Chaque chantier est suivi par une équipe artisanale qui s’appuie sur des relevés numériques pour anticiper la maintenance.</p>
+        <p>Particuliers, bailleurs ou professionnels profitent d’un accompagnement complet : audit, conception, mise en service et documentation. Les finitions restent sobres, les performances, mesurables.</p>
+        <div class="tags">
+          <span class="tag">Audit énergétique</span>
+          <span class="tag">Qualigaz</span>
+          <span class="tag">Suivi numérique</span>
+        </div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=60" alt="Technicien Comte Gaz">
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section--alt" id="chauffage">
+    <div class="wrapper section-grid">
+      <div>
+        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=60" alt="Chaudière gaz moderne">
+      </div>
+      <div>
+        <div class="section-head">Chauffage</div>
+        <h2>Entretenir, optimiser, remplacer</h2>
+        <p>Entretien annuel légal, dépannage express, remplacement par chaudières à condensation ou hybrides : tout est orchestré avec une documentation limpide et une esthétique minimaliste.</p>
+        <p>Régulations adaptées, thermostats connectés et opérations de désembouage garantissent un confort constant tout en réduisant la consommation.</p>
+        <div class="pill-grid">
+          <span class="pill">Contrats RGE</span>
+          <span class="pill">Régulations</span>
+          <span class="pill">Radiateurs</span>
+          <span class="pill">PACS hybrides</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block" id="plomberie">
+    <div class="wrapper section-grid">
+      <div>
+        <div class="section-head">Plomberie</div>
+        <h2>Cuivre apparent, gaz sécurisé, réseaux discrets</h2>
+        <p>Recherche de fuites, réducteurs de pression, débouchages haute pression ou création complète de réseaux apparents : nous travaillons cuivre, acier ou multicouche dans le respect strict des normes Qualigaz.</p>
+        <p>La sobriété de la mise en page souligne la propreté de nos installations et la traçabilité des interventions.</p>
+        <div class="tags">
+          <span class="tag">Recherche de fuite</span>
+          <span class="tag">Gaz</span>
+          <span class="tag">Assainissement</span>
+        </div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=900&q=60" alt="Plomberie cuivre">
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block section--alt" id="sanitaire">
+    <div class="wrapper section-grid">
+      <div>
+        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=60" alt="Salle de bain Comte Gaz">
+      </div>
+      <div>
+        <div class="section-head">Sanitaire</div>
+        <h2>Salles de bains épurées</h2>
+        <p>Nous imaginons et rénovons vos salles d’eau : douches italiennes, colonnes thermostatiques, ballons d’eau chaude ou accessoires PMR. La palette blanche et graphite domine, ponctuée de textures métalliques qui signent l’identité Comte Gaz.</p>
+        <p>Chaque chantier est livré clé en main avec plan 3D, sélection de matériaux et suivi de la production d’eau chaude, qu’elle soit électrique ou gaz.</p>
+        <div class="pill-grid">
+          <span class="pill">Douches italiennes</span>
+          <span class="pill">Ballons gaz</span>
+          <span class="pill">Mitigeurs</span>
+          <span class="pill">Accessibilité</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-block" id="entretien">
+    <div class="wrapper section-grid">
+      <div>
+        <div class="section-head">Entretien &amp; dépannage</div>
+        <h2>Contrat clair, certificat assuré</h2>
+        <p>Nous réalisons l’entretien annuel réglementaire, délivrons le certificat et restons mobilisables en urgence à Toulouse et alentours. Les packs maintenance intègrent alertes connectées et rapports simplifiés.</p>
+        <p>Le design blanc reflète la transparence de nos services : informations lisibles, documents classés, traçabilité totale.</p>
+        <div class="tags">
+          <span class="tag">Certificat 05/07/1996</span>
+          <span class="tag">Support 6j/7</span>
+          <span class="tag">Alertes connectées</span>
+        </div>
+      </div>
+      <div>
+        <img src="https://images.unsplash.com/photo-1505483531331-40778c0f0ae0?auto=format&fit=crop&w=900&q=60" alt="Entretien chaudière">
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrapper contact-grid">
+      <div class="contact-card">
+        <div class="section-head">Contact</div>
+        <h3>6 impasse Didier Daurat<br>31400 Toulouse</h3>
+        <p>Téléphone : 05 61 48 39 83</p>
+        <p>E-mail : contact@comte-gaz.fr</p>
+        <p>Du lundi au samedi &mdash; 8h / 19h</p>
+        <div class="btn-row" style="margin-top:1rem;">
+          <a class="btn" href="https://www.facebook.com/Comte-Gaz-148814178545117/" target="_blank" rel="noreferrer">Facebook</a>
+          <a class="btn" href="#contact">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="suppliers">
+    <div class="wrapper">
+      <div class="section-head">Nos fournisseurs</div>
+      <div class="supplier-logos">
+        <span>Saunier Duval</span>
+        <span>Elm Leblanc</span>
+        <span>Frisquet</span>
+        <span>Chaffoteaux</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrapper" style="padding-bottom:3rem;" id="carte">
+    <iframe class="map" src="https://www.google.com/maps?q=43.565309,1.4915233&z=15&output=embed" allowfullscreen loading="lazy" title="Comte Gaz"></iframe>
+  </div>
+
+  <footer class="footer">
+    <div class="wrapper footer-inner">
+      <div>
+        <h4>Comte Gaz</h4>
+        <p>Chauffage, plomberie et sanitaire à Toulouse depuis 2001.</p>
+      </div>
+      <div>
+        <h4>Coordonnées</h4>
+        <p>6 impasse Didier Daurat<br>31400 Toulouse<br>T 05 61 48 39 83</p>
+      </div>
+      <div>
+        <h4>Réseaux</h4>
+        <p><a href="https://www.facebook.com/Comte-Gaz-148814178545117/" target="_blank" rel="noreferrer">Facebook</a><br><a href="#contact">Instagram</a></p>
+      </div>
+    </div>
+    <div class="wrapper copyright">
+      © 2025 Comte Gaz. Site inspiré de la version officielle, interprété en monochrome.
+    </div>
+  </footer>
+
+  <a
+    href="https://wa.me/33561483983"
+    class="whatsapp-fab"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Discuter avec Comte Gaz sur WhatsApp"
+  >
+    <span>💬</span> WhatsApp
+  </a>
+
+  <script>
+    const nav = document.getElementById("main-nav");
+    const toggle = document.querySelector(".menu-toggle");
+
+    toggle.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", isOpen);
+    });
+
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+</html>
+
